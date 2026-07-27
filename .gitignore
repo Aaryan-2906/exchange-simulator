@@ -1,0 +1,14 @@
+build/
+*.o
+*.a
+*.so
+*.out
+demo
+bench
+unit_tests
+CMakeCache.txt
+CMakeFiles/
+.vscode/
+.idea/
+*.swp
+.DS_Store
