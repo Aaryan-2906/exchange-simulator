@@ -1,4 +1,4 @@
-# ⚡ Exchange Simulator
+# Exchange Simulator
 
 A high-performance limit order book and matching engine built in **C++20**, designed to simulate the core order-matching infrastructure of a real exchange.
 
