@@ -25,16 +25,22 @@ bool OrderBook::remove_order(OrderId id) {
     }
     const OrderLocation& loc = idx_it->second;
 
-    if (loc.side == Side::Buy) {
-        auto level_it = bids_.find(loc.price);
+    // Copy the fields we need BEFORE erasing from order_index_ below --
+    // `loc` is a reference into that hashtable's node, so erasing the
+    // node would leave `loc` dangling.
+    Side side = loc.side;
+    Price price = loc.price;
+
+    if (side == Side::Buy) {
+        auto level_it = bids_.find(price);
         level_it->second.erase(loc.it);
     } else {
-        auto level_it = asks_.find(loc.price);
+        auto level_it = asks_.find(price);
         level_it->second.erase(loc.it);
     }
 
     order_index_.erase(idx_it);
-    erase_level_if_empty(loc.side, loc.price);
+    erase_level_if_empty(side, price);
     return true;
 }
 

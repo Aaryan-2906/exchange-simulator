@@ -66,11 +66,16 @@ bool FlatOrderBook::remove_order(OrderId id) {
     bool is_bid = (loc.side == Side::Buy);
     auto& levels = is_bid ? bids_ : asks_;
 
-    PriceLevelEntry* level = find_level(levels, loc.price, is_bid);
+    // Copy price BEFORE erasing from order_index_ below -- `loc` is a
+    // reference into that hashtable's node, so it would dangle after the
+    // erase.
+    Price price = loc.price;
+
+    PriceLevelEntry* level = find_level(levels, price, is_bid);
     level->orders.erase(loc.it);
 
     order_index_.erase(idx_it);
-    erase_level_if_empty(levels, loc.price, is_bid);
+    erase_level_if_empty(levels, price, is_bid);
     return true;
 }
 
