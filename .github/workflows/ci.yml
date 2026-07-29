@@ -36,3 +36,7 @@ jobs:
       - name: Run benchmark (informational, not a pass/fail gate)
         working-directory: build
         run: ./bench 50000
+
+      - name: Run concurrent demo (Phase 4 pipeline)
+        working-directory: build
+        run: ./concurrent_demo 50000
