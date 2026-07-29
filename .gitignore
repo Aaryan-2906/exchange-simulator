@@ -6,6 +6,9 @@ build/
 demo
 bench
 unit_tests
+concurrent_demo
+exchange_server
+*.db
 CMakeCache.txt
 CMakeFiles/
 .vscode/
